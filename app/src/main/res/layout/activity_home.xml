@@ -65,15 +65,15 @@
     </LinearLayout>
 
 
-    <ImageView
+    <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/imageView"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_marginEnd="40dp"
         android:layout_marginBottom="-40dp"
-        android:background="@drawable/circle_container"
         android:elevation="10dp"
-        android:src="@drawable/logo"
+        app:shapeAppearanceOverlay="@style/CircularCorners"
+        android:src="@drawable/default_pic"
         app:layout_constraintBottom_toTopOf="@id/cl_content_container"
         app:layout_constraintEnd_toEndOf="parent" />
 
