@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Theme.EnlEASEt" parent="android:Theme.Material.Light.NoActionBar" />
+
+    <style name="DLSUTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/dlsuGreen</item>
+        <item name="colorPrimaryDark">@color/dlsuDarkGreen</item>
+        <item name="colorAccent">@color/dlsuAccent</item>
+
+        <item name="android:textColorPrimary">@color/colorTextPrimary</item>
+        <item name="android:textColorSecondary">@color/colorTextSecondary</item>
+        <item name="android:buttonStyle">@style/DLSUButton</item>
+    </style>
+
+    <!-- Custom button style -->
+    <style name="DLSUButton" parent="Widget.AppCompat.Button">
+        <item name="android:background">@drawable/button_background</item>
+        <item name="android:textColor">@color/colorTextPrimary</item>
+    </style>
+</resources>
