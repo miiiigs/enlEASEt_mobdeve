@@ -34,7 +34,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="50dp"
-            android:src="@drawable/mydlsu" />
+            android:src="@drawable/logo" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/ll_login_container"
@@ -56,7 +56,7 @@
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="20dp"
                 android:background="@color/white"
-                android:hint="Email"
+                android:hint="ID Number"
                 android:inputType="textEmailAddress"
                 android:padding="15dp"
                 android:textColor="@color/black"
@@ -79,7 +79,6 @@
                 android:padding="15dp"
                 android:textColor="@color/black"
                 android:textColorHint="@color/colorTextSecondary"
-                app:layout_constraintEnd_toTopOf="@+id/bt_login"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/et_login_email" />
 
@@ -92,6 +91,7 @@
                 android:layout_marginEnd="20dp"
                 android:layout_marginBottom="20dp"
                 android:background="@drawable/button_background"
+                android:text=""
                 android:padding="15dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
