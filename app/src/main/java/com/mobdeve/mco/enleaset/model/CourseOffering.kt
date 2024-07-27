@@ -9,5 +9,9 @@ data class CourseOffering(
     var professor: Professor? = null,
     val slots: Int = 0,
     val slotsTaken: Int = 0,
-    val availability: String = ""
+    val availability: String = "",
+    val day: String = "",
+    val timeStart: String = "",
+    val timeEnd: String = "",
+    val location: String = ""
 )

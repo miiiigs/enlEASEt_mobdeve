@@ -14,9 +14,11 @@ class CourseOfferingAdapter (private val courseOfferingList: List<CourseOffering
 
     class CourseOfferingViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val courseNameTextView: TextView = itemView.findViewById(R.id.tv_course_name)
+        val courseTimeTextView: TextView = itemView.findViewById(R.id.tv_course_time)
         val professorNameTextView: TextView = itemView.findViewById(R.id.tv_prof_name)
         val slotsTextView: TextView = itemView.findViewById(R.id.tv_course_slots)
         val availabilityButton: Button = itemView.findViewById(R.id.bt_course_action)
+        val courseLocationTextView: TextView = itemView.findViewById(R.id.tv_course_location)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CourseOfferingViewHolder {
@@ -27,9 +29,11 @@ class CourseOfferingAdapter (private val courseOfferingList: List<CourseOffering
 
     override fun onBindViewHolder(holder: CourseOfferingViewHolder, position: Int) {
         val courseOffering = courseOfferingList[position]
+        holder.courseTimeTextView.text = "${courseOffering.day} ${courseOffering.timeStart} - ${courseOffering.timeEnd}"
         holder.courseNameTextView.text = courseOffering.course?.code
         holder.professorNameTextView.text = "${courseOffering.professor?.firstname} ${courseOffering.professor?.lastname}"
         holder.slotsTextView.text = "${courseOffering.slotsTaken}/${courseOffering.slots} SLOTS TAKEN"
+        holder.courseLocationTextView.text = courseOffering.location
         if(courseOffering.availability == "open"){
             holder.availabilityButton.text = "ADD COURSE"
         }else{

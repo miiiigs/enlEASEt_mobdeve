@@ -51,6 +51,7 @@ class CoursesActivity : AppCompatActivity() {
                     for (courseOffering in courseOfferingList) {
                         if (courseOffering.course?.name?.lowercase()?.contains(query) == true ||
                             courseOffering.course?.code?.lowercase()?.contains(query) == true ||
+                            courseOffering.location.lowercase().contains(query) ||
                             courseOffering.professor?.firstname?.lowercase()?.contains(query) == true ||
                             courseOffering.professor?.lastname?.lowercase()?.contains(query) == true) {
                             filteredList.add(courseOffering)
