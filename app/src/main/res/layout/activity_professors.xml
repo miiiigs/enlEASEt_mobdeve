@@ -79,6 +79,7 @@
             android:background="@drawable/circle_container"
             android:backgroundTint="@color/white"
             android:hint="Search for a Professor, Course, or Department"
+            android:singleLine="true"
             android:padding="5dp"
             android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="parent"
