@@ -100,20 +100,15 @@
         <ImageView
             android:id="@+id/iv_filter"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_marginStart="10dp"
             android:layout_marginEnd="30dp"
-            android:src="@drawable/filter_icon"
             android:layout_weight="0"
             android:background="@drawable/round_container"
             android:backgroundTint="@color/dlsuGreen"
-            android:paddingVertical="5dp"
             android:paddingHorizontal="20dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintDimensionRatio="1:1"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:scaleType="center"
+            android:src="@drawable/filter_icon" />
 
 
     </LinearLayout>
