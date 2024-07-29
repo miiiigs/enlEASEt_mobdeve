@@ -22,16 +22,18 @@ import com.mobdeve.mco.enleaset.model.Course
 import com.mobdeve.mco.enleaset.model.CourseOffering
 import com.mobdeve.mco.enleaset.model.Professor
 
-class CoursesActivity : AppCompatActivity() {
+class CoursesActivity : AppCompatActivity(),FilterDialogFragment.FilterDialogListener {
 
     private lateinit var auth: FirebaseAuth
     private lateinit var firestore: FirebaseFirestore
     private lateinit var homeIconImageView: ImageView
     private lateinit var recyclerView: RecyclerView
     private lateinit var searchEditText: EditText
+    private lateinit var filterIcon: ImageView
     private lateinit var courseOfferingAdapter: CourseOfferingAdapter
     private var courseOfferingList: MutableList<CourseOffering> = mutableListOf()
     private var filteredList: MutableList<CourseOffering> = mutableListOf()
+    private var professorList: MutableList<Professor> = mutableListOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -63,6 +65,11 @@ class CoursesActivity : AppCompatActivity() {
 
             override fun afterTextChanged(s: Editable?) {}
         })
+
+        filterIcon = findViewById(R.id.iv_filter)
+        filterIcon.setOnClickListener {
+            showFilterDialog()
+        }
 
         homeIconImageView = findViewById(R.id.iv_home_icon)
         homeIconImageView.setOnClickListener {
@@ -107,6 +114,7 @@ class CoursesActivity : AppCompatActivity() {
 
                         courseOffering.professorRef?.get()?.addOnSuccessListener { professorDoc ->
                             val professor = professorDoc.toObject(Professor::class.java)
+                            professorList.add(professor!!)
                             courseOffering.professor = professor
 
                             courseOfferingList.add(courseOffering)
@@ -127,5 +135,30 @@ class CoursesActivity : AppCompatActivity() {
             .addOnFailureListener { exception ->
                 Toast.makeText(this, "Error: ${exception.message}", Toast.LENGTH_SHORT).show()
             }
+    }
+
+    private fun showFilterDialog() {
+        val dialog = FilterDialogFragment()
+        dialog.setFilterDialogListener(this)
+        dialog.setProfessorList(professorList)
+        dialog.show(supportFragmentManager, "FilterDialogFragment")
+    }
+
+    override fun onFilterApplied(availability: String?, day: String?, time: String?, professor: String?) {
+        filteredList.clear()
+        val times = time?.split(" - ")
+        val timeStart = times?.get(0)
+        val timeEnd = times?.get(1)
+        for (courseOffering in courseOfferingList) {
+            val matchesAvailability = availability == null || courseOffering.availability == availability.lowercase()
+            val matchesDay = day == null || courseOffering.day == day
+            val matchesTime = time == null || (courseOffering.timeStart == timeStart && courseOffering.timeEnd == timeEnd)
+            val matchesProfessor = professor == null || "${courseOffering.professor?.firstname} ${courseOffering.professor?.lastname}" == professor
+
+            if (matchesAvailability && matchesDay && matchesTime && matchesProfessor) {
+                filteredList.add(courseOffering)
+            }
+        }
+        courseOfferingAdapter.notifyDataSetChanged()
     }
 }
