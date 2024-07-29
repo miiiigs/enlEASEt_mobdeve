@@ -34,6 +34,7 @@ class CoursesActivity : AppCompatActivity(),FilterDialogFragment.FilterDialogLis
     private var courseOfferingList: MutableList<CourseOffering> = mutableListOf()
     private var filteredList: MutableList<CourseOffering> = mutableListOf()
     private var professorList: MutableList<Professor> = mutableListOf()
+    private val timeSlots = mutableSetOf<String>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -108,6 +109,8 @@ class CoursesActivity : AppCompatActivity(),FilterDialogFragment.FilterDialogLis
                     Log.d("CourseOffering", courseOffering.toString())
                     courseOffering.courseRef = document.getDocumentReference("courseRef")
                     courseOffering.professorRef = document.getDocumentReference("professorRef")
+                    val timeSlot = "${courseOffering.timeStart} - ${courseOffering.timeEnd}"
+                    timeSlots.add(timeSlot)
                     courseOffering.courseRef?.get()?.addOnSuccessListener { courseDoc ->
                         val course = courseDoc.toObject(Course::class.java)
                         courseOffering.course = course
@@ -141,6 +144,7 @@ class CoursesActivity : AppCompatActivity(),FilterDialogFragment.FilterDialogLis
         val dialog = FilterDialogFragment()
         dialog.setFilterDialogListener(this)
         dialog.setProfessorList(professorList)
+        dialog.setTimeSlots(timeSlots.toList())
         dialog.show(supportFragmentManager, "FilterDialogFragment")
     }
 
