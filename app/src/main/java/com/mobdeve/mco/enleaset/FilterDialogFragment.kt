@@ -33,6 +33,7 @@ class FilterDialogFragment: DialogFragment() {
     private var listener: FilterDialogListener? = null
     private lateinit var sharedPreferences: SharedPreferences
     private var professorList = listOf<Professor>()
+    private var timeSlots = listOf<String>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -92,13 +93,19 @@ class FilterDialogFragment: DialogFragment() {
         this.professorList = professors
     }
 
+    fun setTimeSlots(timeSlots: List<String>) {
+        this.timeSlots = timeSlots
+    }
+
     private fun populateSpinners() {
+        val initialTimeSlots = listOf("-","7:30 - 9:00", "09:15 - 10:45", "11:00 - 12:30", "12:45 - 14:15", "14:30 - 16:00", "16:15 - 17:45", "18:00 - 19:30", "19:45 - 21:15")
+
         val days = listOf("-", "MH","TF", "WS", "M", "T", "W", "H", "F", "S")
         val dayAdapter = ArrayAdapter(requireContext(), R.layout.spinner_item, days)
         dayAdapter.setDropDownViewResource(R.layout.spinner_dropdown_item)
         spinnerDay.adapter = dayAdapter
 
-        val times = listOf("-","7:30 - 9:00", "09:15 - 10:45", "11:00 - 12:30", "12:45 - 14:15", "14:30 - 16:00", "16:15 - 17:45", "18:00 - 19:30", "19:45 - 21:15")
+        val times = initialTimeSlots + timeSlots.filter { !initialTimeSlots.contains(it) }.sorted()
         val timeAdapter = ArrayAdapter(requireContext(), R.layout.spinner_item, times)
         timeAdapter.setDropDownViewResource(R.layout.spinner_dropdown_item)
         spinnerTime.adapter = timeAdapter
